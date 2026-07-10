@@ -139,3 +139,6 @@ p.game-description { font-size: 13px; line-height: 1.5; color: #aaaaaa; text-ali
 .screen-title-game { color: #ffae19; font-size: 18px; font-weight: bold; text-align: center; margin-bottom: 12px; text-shadow: 1px 1px 2px #000; }
 .text-orange { color: #ffae19; }
 .text-blue { color: #4da6ff; }
+.q-ancient { color: #8e44ad; }    /* Фиолетовый */
+   .q-epic { color: #2980b9; }       /* Синий */
+   .q-chaotic { color: #c0392b; font-weight: bold; } /* Ярко-красный */
