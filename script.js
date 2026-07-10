@@ -20,12 +20,15 @@ const monsterDatabase = [
     { name: "Тролль", hp: 11000, maxHp: 11000, attack: 450, image: "troll.jpg", exp: 1150, silver: 700, icon: "👹" }
 ];
 
-const dungeonDatabase = [
+const const dungeonDatabase = [
     { name: "Огр", hp: 2500, maxHp: 2500, attack: 90, image: "ogrik.jpg", exp: 350, silver: 500, icon: "👹", reqLvl: 5, qText: "Обычное подземелье", qClass: "q-common" },
     { name: "Огр II", hp: 6000, maxHp: 6000, attack: 180, image: "ogriks.jpg", exp: 900, silver: 1500, icon: "🔥", reqLvl: 10, qText: "Редкое подземелье", qClass: "q-rare" },
     { name: "Великан", hp: 15000, maxHp: 15000, attack: 350, image: "velikan.jpg", exp: 2500, silver: 4000, icon: "🗿", reqLvl: 15, qText: "Мифическое подземелье", qClass: "q-mythic" },
     { name: "Ледяной Титан", hp: 35000, maxHp: 35000, attack: 680, image: "ledtitan.jpg", exp: 7000, silver: 12000, icon: "❄️", reqLvl: 20, qText: "Легендарное подземелье", qClass: "q-legend" },
-    { name: "Паладин", hp: 80000, maxHp: 80000, attack: 1400, image: "paladin.jpg", exp: 20000, silver: 35000, icon: "🛡️", reqLvl: 25, qText: "Божественное подземелье", qClass: "q-divine" }
+    { name: "Паладин", hp: 80000, maxHp: 80000, attack: 1400, image: "paladin.jpg", exp: 20000, silver: 35000, icon: "🛡️", reqLvl: 25, qText: "Божественное подземелье", qClass: "q-divine" },
+    { name: "Лорд", hp: 200000, maxHp: 200000, attack: 3000, image: "lord.jpg", exp: 50000, silver: 80000, icon: "👑", reqLvl: 30, qText: "Древнее подземелье", qClass: "q-ancient" },
+    { name: "Огненный Элементаль", hp: 450000, maxHp: 450000, attack: 7000, image: "oges.jpg", exp: 120000, silver: 200000, icon: "🔥", reqLvl: 35, qText: "Эпическое подземелье", qClass: "q-epic" },
+    { name: "Теризла", hp: 1000000, maxHp: 1000000, attack: 15000, image: "terik.jpg", exp: 300000, silver: 500000, icon: "😈", reqLvl: 40, qText: "Хаотичное подземелье", qClass: "q-chaotic" }
 ];
 
 let currentMonster = null;
