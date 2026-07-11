@@ -243,8 +243,9 @@ function checkMultiLevelUp() {
         activePlayer.exp -= required; 
         activePlayer.level += 1; 
         
-        // Добавляем +100 к макс. ХП при каждом новом уровне
-        activePlayer.maxHp += 100; 
+        // Добавляем +100 к макс. ХП и макс. энергии
+activePlayer.maxHp += 100;
+activePlayer.maxEnergy += 100; 
         
         required = getRequiredExp(activePlayer.level); 
         levelUpOccurred = true; 
