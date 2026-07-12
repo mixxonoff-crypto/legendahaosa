@@ -46,7 +46,7 @@ function toRoman(num) {
 }
 
 function getRequiredExp(level) { return 100 + (level - 1) * 50; }
-function getEnergyPrice(level) { return 10 + (level * 2); }
+function getEnergyPrice(level) { return 100 + (level * 2); }
 
 function getItemQuality(level) {
     if (level < 30) return { text: "Обычное", class: "q-common" };
@@ -130,7 +130,7 @@ function handleRegister() {
     let nextId = (user.toLowerCase() === 'admin') ? 1 : users.length + 2;
     
     const playerData = {
-        username: user, password: pass, hp: 100, maxHp: 100, energy: 100, maxEnergy: 100,
+        username: user, password: pass, hp: 1000, maxHp: 1000, energy: 1000, maxEnergy: 1000,
         level: 1, exp: 0, silver: (user.toLowerCase() === 'admin') ? 1000000 : 10,
         battleCircle: 1, currentMonsterIndex: 0, equipment: { shlem: 0, arms: 0, mech: 0, sapogi: 0, shit: 0 },
         lastChestClaimDate: "", userId: nextId, regTimestamp: Date.now(), lastOnlineTime: Date.now(),
@@ -233,8 +233,8 @@ function calculateStats() {
     let forgeDefense = activePlayer.equipment.shlem + activePlayer.equipment.arms + activePlayer.equipment.sapogi + activePlayer.equipment.shit;
     
     // БОНУСЫ ЗА УРОВЕНЬ: +1000 атаки, +500 брони
-    activePlayer.attack = 15 + (activePlayer.level * 1000) + forgeAttack;
-    activePlayer.defense = 10 + (activePlayer.level * 500) + forgeDefense;
+    activePlayer.attack = 1000 + (activePlayer.level * 1000) + forgeAttack;
+    activePlayer.defense = 500 + (activePlayer.level * 500) + forgeDefense;
     
     saveData();
     updateGameUI();
@@ -246,8 +246,8 @@ function checkMultiLevelUp() {
     while (activePlayer.exp >= required) { 
         activePlayer.exp -= required; 
         activePlayer.level += 1; 
-        activePlayer.maxHp += 100;
-        activePlayer.maxEnergy += 100; 
+        activePlayer.maxHp += 1000;
+        activePlayer.maxEnergy += 1000; 
         required = getRequiredExp(activePlayer.level); 
         levelUpOccurred = true; 
     }
