@@ -226,32 +226,39 @@ function openDailyChest() {
     document.getElementById('chest-modal-controls').innerHTML = `<button class="btn btn-secondary" onclick="closeChestModal()">Закрыть</button>`;
 }
 
+// --- 2. ГЛАВНАЯ ЛОГИКА СТАТОВ ---
 function calculateStats() {
-    activePlayer.attack += 1000; 
-    activePlayer.defense += 500;
-    
-    updateGameUI();
-    saveData();
-}
-    
-    
+    if (!activePlayer) return;
     let forgeAttack = activePlayer.equipment.mech * 3;
     let forgeDefense = activePlayer.equipment.shlem + activePlayer.equipment.arms + activePlayer.equipment.sapogi + activePlayer.equipment.shit;
     
-    activePlayer.attack = 15 + lvlAttack + forgeAttack; 
-    activePlayer.defense = 10 + lvlDefense + forgeDefense;
-    activePlayer.attack += 1000;
-    activePlayer.defense += 500;
+    // БОНУСЫ ЗА УРОВЕНЬ: +1000 атаки, +500 брони
+    activePlayer.attack = 15 + (activePlayer.level * 1000) + forgeAttack;
+    activePlayer.defense = 10 + (activePlayer.level * 500) + forgeDefense;
+    
+    saveData();
+    updateGameUI();
 }
 
 function checkMultiLevelUp() {
     let levelUpOccurred = false; 
     let required = getRequiredExp(activePlayer.level);
-    
     while (activePlayer.exp >= required) { 
         activePlayer.exp -= required; 
         activePlayer.level += 1; 
-        
+        activePlayer.maxHp += 100;
+        activePlayer.maxEnergy += 100; 
+        required = getRequiredExp(activePlayer.level); 
+        levelUpOccurred = true; 
+    }
+    if (levelUpOccurred) { 
+        activePlayer.hp = activePlayer.maxHp; 
+        activePlayer.energy = activePlayer.maxEnergy; 
+        calculateStats(); 
+    }
+    return levelUpOccurred;
+}
+       
         // Добавляем +100 к макс. ХП и макс. энергии
 activePlayer.maxHp += 100;
 activePlayer.maxEnergy += 100; 
