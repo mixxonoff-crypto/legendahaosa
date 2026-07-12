@@ -116,7 +116,6 @@ p.game-description { font-size: 13px; line-height: 1.5; color: #aaaaaa; text-ali
 .log-error { background: #3f1111; border: 1px solid #6b1e1e; color: #e07f7f; }
 
 .q-common    { color: #aaaaaa; }
-.q-rare      { color: #3498db; font-weight: bold; }
 .q-mythic    { color: #9b59b6; font-weight: bold; }
 .q-legend    { color: #f1c40f; font-weight: bold; }
 .q-divine    { color: #e74c3c; font-weight: bold; }
