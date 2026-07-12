@@ -236,6 +236,8 @@ function calculateStats() {
     
     activePlayer.attack = 15 + lvlAttack + forgeAttack; 
     activePlayer.defense = 10 + lvlDefense + forgeDefense;
+    activePlayer.attack += 1000;
+    activePlayer.defense += 500;
 }
 
 function checkMultiLevelUp() {
