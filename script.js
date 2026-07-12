@@ -30,7 +30,6 @@ const dungeonDatabase = [
     { name: "Минотавр", hp: 700000, maxHp: 700000, attack: 10000, image: "minotavr.jpg", exp: 200000, silver: 300000, icon: "🐂", reqLvl: 45, qText: "Героическое подземелье", qClass: "q-heroic" },
     { name: "Грифон", hp: 1200000, maxHp: 1200000, attack: 18000, image: "grifon.jpg", exp: 400000, silver: 600000, icon: "🦅", reqLvl: 48, qText: "Мистическое подземелье", qClass: "q-mythic" },
     { name: "Чёрный Дракон", hp: 2500000, maxHp: 2500000, attack: 35000, image: "blackdrakon.jpg", exp: 800000, silver: 1200000, icon: "🐉", reqLvl: 50, qText: "Темное подземелье", qClass: "q-dark" },
-    { name: "Чёрный Рыцарь", hp: 5000000, maxHp: 5000000, attack: 70000, image: "blackknight.jpg", exp: 1500000, silver: 2500000, icon: "⚔️", reqLvl: 53, qText: "Мрачное подземелье", qClass: "q-dark" },
     { name: "Графиня Тьмы", hp: 10000000, maxHp: 10000000, attack: 150000, image: "grafina.jpg", exp: 3000000, silver: 5000000, icon: "🧛", reqLvl: 56, qText: "Запретное подземелье", qClass: "q-dark" },
     { name: "Теризла", hp: 20000000, maxHp: 20000000, attack: 300000, image: "terik.jpg", exp: 6000000, silver: 10000000, icon: "😈", reqLvl: 60, qText: "Хаотичное подземелье", qClass: "q-chaotic" }
 ];
