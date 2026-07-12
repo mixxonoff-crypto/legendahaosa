@@ -48,14 +48,6 @@ function toRoman(num) {
 function getRequiredExp(level) { return 100 + (level - 1) * 50; }
 function getEnergyPrice(level) { return 100 + (level * 2); }
 
-function getItemQuality(level) {
-    if (level < 30) return { text: "Обычное", class: "q-common" };
-    if (level < 60) return { text: "Редкое", class: "q-rare" };
-    if (level < 90) return { text: "Мифическое", class: "q-mythic" };
-    if (level < 120) return { text: "Легендарное", class: "q-legend" };
-    return { text: "Божественное", class: "q-divine" };
-}
-
 function getKyivDateString() {
     return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Kyiv', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 }
