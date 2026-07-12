@@ -115,11 +115,18 @@ p.game-description { font-size: 13px; line-height: 1.5; color: #aaaaaa; text-ali
 .log-success { background: #113f1b; border: 1px solid #1e6b30; color: #7fe099; }
 .log-error { background: #3f1111; border: 1px solid #6b1e1e; color: #e07f7f; }
 
-.q-common { color: #aaaaaa; }
-.q-rare { color: #1e88e5; font-weight: bold; }
-.q-mythic { color: #8e24aa; font-weight: bold; }
-.q-legend { color: #f4511e; font-weight: bold; }
-.q-divine { color: #ffb300; font-weight: bold; text-shadow: 0 0 3px rgba(255,179,0,0.4); }
+.q-common    { color: #aaaaaa; }
+.q-rare      { color: #3498db; font-weight: bold; }
+.q-mythic    { color: #9b59b6; font-weight: bold; }
+.q-legend    { color: #f1c40f; font-weight: bold; }
+.q-divine    { color: #e74c3c; font-weight: bold; }
+.q-ancient   { color: #e67e22; font-weight: bold; }
+.q-epic      { color: #2ecc71; font-weight: bold; }
+.q-heroic    { color: #007bff; font-weight: bold; }
+.q-mystic    { color: #8e44ad; font-weight: bold; }
+.q-dark      { color: #2c3e50; font-weight: bold; }
+.q-grim      { color: #4a4a4a; font-weight: bold; }
+.q-forbidden { color: #880e4f; font-weight: bold; }
 
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 1000; }
 .modal-content { background: #141414; border: 1px solid #ffae19; padding: 20px; border-radius: 6px; width: 85%; max-width: 320px; text-align: center; }
@@ -140,6 +147,3 @@ p.game-description { font-size: 13px; line-height: 1.5; color: #aaaaaa; text-ali
 .text-orange { color: #ffae19; }
 .text-blue { color: #4da6ff; }
 
-.q-ancient { color: #8e44ad; }    /* Фиолетовый */
-   .q-epic { color: #2980b9; }       /* Синий */
-   .q-chaotic { color: #c0392b; font-weight: bold; } /* Ярко-красный */
