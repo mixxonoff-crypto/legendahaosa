@@ -227,9 +227,10 @@ function openDailyChest() {
 }
 
 function calculateStats() {
-    // Увеличим прирост: было 3, стало 10; было 2, стало 8 (подставьте свои значения)
-    let lvlAttack = (activePlayer.level - 1) * 10; 
-    let lvlDefense = (activePlayer.level - 1) * 8;
+    // Увеличим прирост: было 3, стало 1000; было 2, стало 500 //
+    activePlayer.attack += 1000; 
+    activePlayer.defense += 500;
+    
     
     let forgeAttack = activePlayer.equipment.mech * 3;
     let forgeDefense = activePlayer.equipment.shlem + activePlayer.equipment.arms + activePlayer.equipment.sapogi + activePlayer.equipment.shit;
