@@ -227,9 +227,12 @@ function openDailyChest() {
 }
 
 function calculateStats() {
-    // Увеличим прирост: было 3, стало 1000; было 2, стало 500 //
     activePlayer.attack += 1000; 
     activePlayer.defense += 500;
+    
+    updateGameUI();
+    saveData();
+}
     
     
     let forgeAttack = activePlayer.equipment.mech * 3;
