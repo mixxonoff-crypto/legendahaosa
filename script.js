@@ -226,15 +226,10 @@ function openDailyChest() {
     document.getElementById('chest-modal-controls').innerHTML = `<button class="btn btn-secondary" onclick="closeChestModal()">Закрыть</button>`;
 }
 
-// --- 2. ГЛАВНАЯ ЛОГИКА СТАТОВ ---
 function calculateStats() {
     if (!activePlayer) return;
     let forgeAttack = activePlayer.equipment.mech * 3;
     let forgeDefense = activePlayer.equipment.shlem + activePlayer.equipment.arms + activePlayer.equipment.sapogi + activePlayer.equipment.shit;
-    
-    // БОНУСЫ ЗА УРОВЕНЬ: +1000 атаки, +500 брони
-    activePlayer.attack = 1000 + (activePlayer.level * 1000) + forgeAttack;
-    activePlayer.defense = 500 + (activePlayer.level * 500) + forgeDefense;
     
     saveData();
     updateGameUI();
