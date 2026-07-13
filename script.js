@@ -23,7 +23,7 @@ const monsterDatabase = [
 const dungeonDatabase = [
     { name: "Огр", hp: 2500, maxHp: 2500, attack: 90, image: "ogrik.jpg", exp: 350, silver: 500, icon: "👹", reqLvl: 5, qText: "Обычное подземелье", qClass: "q-common" },
     { name: "Великан", hp: 15000, maxHp: 15000, attack: 350, image: "velikan.jpg", exp: 2500, silver: 4000, icon: "🗿", reqLvl: 15, qText: "Мифическое подземелье", qClass: "q-mythic" },
-    { name: "Ледяной Титан", hp: 35000, maxHp: 35000, attack: 680, image: "ledtitan.jpg", exp: 7000, silver: 12000, icon: "❄️", reqLvl: 20, qText: "Легендарное подземелье", qClass: "q-legend" },
+    { name: "Ледяной Титан", hp: 35000, maxHp: 35000, attack: 680, image: "ledtitan.jpg", exp: 3000, silver: 12000, icon: "❄️", reqLvl: 20, qText: "Легендарное подземелье", qClass: "q-legend" },
     { name: "Паладин", hp: 80000, maxHp: 80000, attack: 1400, image: "paladin.jpg", exp: 5000, silver: 15000, icon: "🛡️", reqLvl: 25, qText: "Божественное подземелье", qClass: "q-divine" },
     { name: "Лорд", hp: 200000, maxHp: 200000, attack: 3000, image: "lord.jpg", exp: 7500, silver: 20000, icon: "👑", reqLvl: 30, qText: "Древнее подземелье", qClass: "q-ancient" },
     { name: "Огненный Элементаль", hp: 450000, maxHp: 450000, attack: 7000, image: "oges.jpg", exp: 10000, silver: 25000, icon: "🔥", reqLvl: 35, qText: "Эпическое подземелье", qClass: "q-epic" },
@@ -31,7 +31,7 @@ const dungeonDatabase = [
     { name: "Грифон", hp: 1200000, maxHp: 1200000, attack: 18000, image: "grifon.jpg", exp: 15000, silver: 75000, icon: "🦅", reqLvl: 48, qText: "Мистическое подземелье", qClass: "q-mythic" },
     { name: "Чёрный Дракон", hp: 2500000, maxHp: 2500000, attack: 35000, image: "blackdrakon.jpg", exp: 17500, silver: 10000, icon: "🐉", reqLvl: 50, qText: "Темное подземелье", qClass: "q-dark" },
     { name: "Графиня Тьмы", hp: 10000000, maxHp: 10000000, attack: 150000, image: "grafina.jpg", exp: 20000, silver: 125000, icon: "🧛", reqLvl: 56, qText: "Запретное подземелье", qClass: "q-dark" },
-    { name: "Теризла", hp: 20000000, maxHp: 20000000, attack: 300000, image: "terik.jpg", exp: 22500, silver: 10000000, icon: "😈", reqLvl: 60, qText: "Хаотичное подземелье", qClass: "q-chaotic" },
+    { name: "Теризла", hp: 20000000, maxHp: 20000000, attack: 300000, image: "terik.jpg", exp: 22500, silver: 130000, icon: "😈", reqLvl: 60, qText: "Хаотичное подземелье", qClass: "q-chaotic" },
   { name: "Король Мёртвых", hp: 50000000, maxHp: 50000000, attack: 500000, image: "king_dead.jpg", exp: 25000, silver: 150000, icon: "👑", reqLvl: 100, qText: "Демоническое подземелье", qClass: "q-black" },
       { 
         name: "Повелитель Пустоты", 
