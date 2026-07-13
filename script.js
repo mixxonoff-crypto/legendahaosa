@@ -261,14 +261,10 @@ function openDailyChest() {
 
 function calculateStats() {
     if (!activePlayer) return;
-    // Пересчет характеристик
-    let forgeAttack = (activePlayer.equipment.mech || 0) * 3;
-    let forgeDefense = (activePlayer.equipment.shlem || 0) + (activePlayer.equipment.arms || 0) + 
-                       (activePlayer.equipment.sapogi || 0) + (activePlayer.equipment.shit || 0);
-
-    activePlayer.attack = 15 + (activePlayer.level * 1000) + forgeAttack;
-    activePlayer.defense = 10 + (activePlayer.level * 500) + forgeDefense;
     
+ activePlayer.attack = 15 + (activePlayer.level * 1000) + forgeAttack;
+    activePlayer.defense = 10 + (activePlayer.level * 500) + forgeDefense;
+   
     saveData();
     updateGameUI();
 }
@@ -280,8 +276,8 @@ function checkMultiLevelUp() {
     while (activePlayer.exp >= required) { 
         activePlayer.exp -= required; 
         activePlayer.level += 1; 
-        activePlayer.maxHp += 1000;
-        activePlayer.maxEnergy += 1000; 
+        activePlayer.maxHp += 100;
+        activePlayer.maxEnergy += 100; 
         required = getRequiredExp(activePlayer.level); 
         levelUpOccurred = true; 
     }
@@ -463,7 +459,7 @@ function createClan() {
     if (localStorage.getItem('rpg_clan_' + clanNameInput)) { return showGameAlert("Такой клан уже существует!"); }
     if (activePlayer.silver < 1000) { return showGameAlert("Недостаточно серебра! Требуется 1,000 🪙"); }
 
-    activePlayer.silver -= 1000; activePlayer.clanName = clanNameInput;
+    activePlayer.silver -= 10000; activePlayer.clanName = clanNameInput;
     const clanData = { name: clanNameInput, level: 1, exp: 0, gold: 0, about: "Приветствуем воинов Хаоса!", logo: "clan.png", owner: activePlayer.username };
     localStorage.setItem('rpg_clan_' + clanNameInput, JSON.stringify(clanData));
     saveData(); updateGameUI(); updateClanUI(); openGameScreen('clan-main-screen');
@@ -549,7 +545,7 @@ function submitSilverDeposit() {
     if (activePlayer.silver < amount) return showGameAlert("Не хватает серебра!");
     const today = getKyivDateString();
     if (activePlayer.lastSilverDepositDate !== today) { activePlayer.lastSilverDepositDate = today; activePlayer.silverDepositedToday = 0; }
-    if (activePlayer.silverDepositedToday + amount > 1000) { return showGameAlert(`Лимит! Вы можете внести еще максимум ${1000 - activePlayer.silverDepositedToday} серебра сегодня.`); }
+    if (activePlayer.silverDepositedToday + amount > 10000) { return showGameAlert(`Лимит! Вы можете внести еще максимум ${10000 - activePlayer.silverDepositedToday} серебра сегодня.`); }
     const clan = JSON.parse(localStorage.getItem('rpg_clan_' + activePlayer.clanName)); if (!clan) return;
 
     activePlayer.silver -= amount; activePlayer.silverDepositedToday += amount;
