@@ -37,46 +37,16 @@ const dungeonDatabase = [
     { name: "Графиня Тьмы", hp: 10000000, maxHp: 10000000, attack: 150000, image: "grafina.jpg", exp: 20000, silver: 125000, icon: "🧛", reqLvl: 56, qText: "Запретное подземелье", qClass: "q-dark" },
     { name: "Теризла", hp: 20000000, maxHp: 20000000, attack: 300000, image: "terik.jpg", exp: 22500, silver: 130000, icon: "😈", reqLvl: 60, qText: "Хаотичное подземелье", qClass: "q-chaotic" },
     { name: "Король Мёртвых", hp: 50000000, maxHp: 50000000, attack: 500000, image: "king_dead.jpg", exp: 25000, silver: 150000, icon: "👑", reqLvl: 100, qText: "Демоническое подземелье", qClass: "q-black" },
-    { 
-        name: "Повелитель Пустоты", 
-        hp: 150000000, 
-        maxHp: 150000000, 
-        attack: 900000, 
-        image: "void_lord.jpg", 
-        exp: 30000, 
-        silver: 200000, 
-        icon: "🌌", 
-        reqLvl: 120, 
-        qText: "Астральный разлом", 
-        qClass: "q-dark" 
-    },
-    { 
-        name: "Титан Стихий", 
-        hp: 300000000, 
-        maxHp: 300000000, 
-        attack: 1500000, 
-        image: "elemental_titan.jpg", 
-        exp: 35000, 
-        silver: 250000, 
-        icon: "🌀", 
-        reqLvl: 140, 
-        qText: "Пик Стихий", 
-        qClass: "q-epic" 
-    },
-    { 
-        name: "Хранитель Бездны", 
-        hp: 700000000, 
-        maxHp: 700000000, 
-        attack: 3000000, 
-        image: "abyss_guardian.jpg", 
-        exp: 40000, 
-        silver: 300000, 
-        icon: "💀", 
-        reqLvl: 160, 
-        qText: "Сердце Бездны", 
-        qClass: "q-black" 
-    }
+    { name: "Повелитель Пустоты", hp: 150000000, maxHp: 150000000, attack: 900000, image: "void_lord.jpg", exp: 30000, silver: 200000, icon: "🌌", reqLvl: 120, qText: "Астральный разлом", qClass: "q-dark" },
+    { name: "Титан Стихий", hp: 300000000, maxHp: 300000000, attack: 1500000, image: "elemental_titan.jpg", exp: 35000, silver: 250000, icon: "🌀", reqLvl: 140, qText: "Пик Стихий", qClass: "q-epic" },
+    { name: "Хранитель Бездны", hp: 700000000, maxHp: 700000000, attack: 3000000, image: "abyss_guardian.jpg", exp: 40000, silver: 300000, icon: "💀", reqLvl: 160, qText: "Сердце Бездны", qClass: "q-black" },
+    { name: "Диабло", hp: 1500000000, maxHp: 1500000000, attack: 5000000, image: "dia.jpg", exp: 50000, silver: 400000, icon: "👹", reqLvl: 180, qText: "Пылающий Ад", qClass: "q-epic" },
+    { name: "Владыка Преисподней", hp: 3000000000, maxHp: 3000000000, attack: 8000000, image: "dia1.jpg", exp: 65000, silver: 550000, icon: "🔥", reqLvl: 200, qText: "Сердце Преисподней", qClass: "q-dark" },
+    { name: "Архидемон", hp: 6500000000, maxHp: 6500000000, attack: 12000000, image: "dia2.jpg", exp: 80000, silver: 750000, icon: "👿", reqLvl: 220, qText: "Гробница Падших", qClass: "q-black" },
+    { name: "Принц Лжи", hp: 12000000000, maxHp: 12000000000, attack: 18000000, image: "dia3.jpg", exp: 100000, silver: 1000000, icon: "👁️", reqLvl: 240, qText: "Искаженная Реальность", qClass: "q-chaotic" },
+    { name: "Первородное Зло", hp: 25000000000, maxHp: 25000000000, attack: 30000000, image: "dia4.jpg", exp: 130000, silver: 1500000, icon: "🌋", reqLvl: 260, qText: "Исток Тьмы", qClass: "q-ancient" }
 ];
+
 
 let currentMonster = null;
 let currentMonsterIndex = 0;
