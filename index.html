@@ -83,7 +83,6 @@
 
                 <div class="game-buttons">
                     <button class="btn btn-adventure" onclick="startAdventure()">⚔️ Приключения</button>
-                    <button class="btn btn-forge" onclick="openForge()">⚒️ Лавка Кузнеца</button>
                     <button class="btn btn-dungeon" onclick="openDungeonMenu()">😈 Подземелье</button>
                     <button class="btn btn-clan" onclick="openClanMenu()">🛡️ Клан</button>
                     <button class="btn btn-profile" onclick="openProfileScreen()">👤 Профиль</button>
@@ -114,46 +113,7 @@
                 <div class="game-buttons" id="battle-leave-control" style="margin-top: 10px;"></div>
             </div>
 
-            <!-- Лавка кузнеца -->
-            <div id="forge-screen" class="hidden">
-                <div class="screen-title">⚒️ Лавка Кузнеца</div>
-                <div id="forge-log" class="hidden"></div>
-                <div class="image-container">
-                    <img src="kyznec.jpg" alt="Кузнец" class="main-image">
-                </div>
-                <div class="forge-list">
-                    <div class="forge-item">
-                        <img src="shlem.png" class="item-icon">
-                        <div class="item-info"><div>Шлем (<span id="shlem-lvl">0</span> ур.)</div><div id="shlem-quality" class="item-quality">Обычное</div></div>
-                        <button class="btn-upgrade" onclick="upgradeItem('shlem')"><span id="shlem-cost">15</span> 🪙</button>
-                    </div>
-                    <div class="forge-item">
-                        <img src="arms.png" class="item-icon">
-                        <div class="item-info"><div>Броня (<span id="arms-lvl">0</span> ур.)</div><div id="arms-quality" class="item-quality">Обычное</div></div>
-                        <button class="btn-upgrade" onclick="upgradeItem('arms')"><span id="arms-cost">15</span> 🪙</button>
-                    </div>
-                    <div class="forge-item">
-                        <img src="mech.png" class="item-icon">
-                        <div class="item-info"><div>Меч (<span id="mech-lvl">0</span> ур.)</div><div id="mech-quality" class="item-quality">Обычное</div></div>
-                        <button class="btn-upgrade" onclick="upgradeItem('mech')"><span id="mech-cost">15</span> 🪙</button>
-                    </div>
-                    <div class="forge-item">
-                        <img src="sapogi.png" class="item-icon">
-                        <div class="item-info"><div>Сапоги (<span id="sapogi-lvl">0</span> ур.)</div><div id="sapogi-quality" class="item-quality">Обычное</div></div>
-                        <button class="btn-upgrade" onclick="upgradeItem('sapogi')"><span id="sapogi-cost">15</span> 🪙</button>
-                    </div>
-                    <div class="forge-item">
-                        <img src="shit.png" class="item-icon">
-                        <div class="item-info"><div>Щит (<span id="shit-lvl">0</span> ур.)</div><div id="shit-quality" class="item-quality">Обычное</div></div>
-                        <button class="btn-upgrade" onclick="upgradeItem('shit')"><span id="shit-cost">15</span> 🪙</button>
-                    </div>
-                </div>
-                <div class="game-buttons" style="margin-top: 10px;">
-                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">↩️ Назад</button>
-                </div>
-            </div>
-
-            <!-- Подземелье -->
+           <!-- Подземелье -->
             <div id="dungeon-screen" class="hidden">
                 <div class="screen-title">😈 Подземелье</div>
                 <div class="image-container"><img src="podzem.jpg" class="main-image"></div>
