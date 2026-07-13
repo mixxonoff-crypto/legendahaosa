@@ -193,6 +193,7 @@ function handleLogin() {
             activePlayer.energy = Math.min(activePlayer.maxEnergy, activePlayer.energy + passed * 2);
         }
     }
+
     checkMultiLevelUp(); calculateStats(); saveData(); updateGameUI(); checkDailyChestStatus();
     openScreen('game-container'); openGameScreen('game-menu-screen');
 }
@@ -228,6 +229,7 @@ function openProfileSettings() {
     document.getElementById('settings-gender-select').value = activePlayer.gender;
     openGameScreen('profile-settings-screen');
 }
+
 function saveProfileSettings() {
     activePlayer.aboutText = document.getElementById('settings-about-input').value.trim() || "Не заполнено";
     activePlayer.gender = document.getElementById('settings-gender-select').value;
@@ -244,11 +246,12 @@ function checkDailyChestStatus() {
         statusText.innerText = "🎁 Ваша ежедневная награда готова!"; chestBtn.disabled = false; chestBtn.innerText = "Получить награду";
     }
 }
-function showChestModal() {
-    document.getElementById('chest-result').innerText = "Вы можете открыть сундук раз в сутки и получить ценное серебро!";
+
+functionshowChestModal() { document.getElementById('chest-result').innerText = "Вы можете открыть сундук раз в сутки и получить ценное серебро!";
     document.getElementById('chest-modal-controls').innerHTML = `<button class="btn btn-primary" style="background:#cc7a00; border-color:#ff9900;" onclick="openDailyChest()">Открыть сундук</button>`;
     document.getElementById('chest-modal').classList.remove('hidden');
 }
+
 function closeChestModal() { document.getElementById('chest-modal').classList.add('hidden'); checkDailyChestStatus(); }
 
 function openDailyChest() {
@@ -287,6 +290,7 @@ function checkMultiLevelUp() {
         activePlayer.energy = activePlayer.maxEnergy; 
         calculateStats(); 
     }
+
     return levelUpOccurred;
 }
  
@@ -322,22 +326,6 @@ setInterval(() => {
     }
 }, 1000);
 
-function openForge() { document.getElementById('forge-log').className = "hidden"; updateForgeUI(); openGameScreen('forge-screen'); }
-function updateForgeUI() {
-    ['shlem', 'arms', 'mech', 'sapogi', 'shit'].forEach(item => {
-        let lvl = activePlayer.equipment[item]; let cost = 15 + (lvl * 15); let quality = getItemQuality(lvl);
-        document.getElementById(`${item}-lvl`).innerText = lvl; document.getElementById(`${item}-cost`).innerText = cost;
-        document.getElementById(`${item}-quality`).innerText = quality.text; document.getElementById(`${item}-quality`).className = `item-quality ${quality.class}`;
-    });
-}
-function upgradeItem(itemName) {
-    const logBox = document.getElementById('forge-log'); let currentLvl = activePlayer.equipment[itemName]; let cost = 15 + (currentLvl * 15);
-    if (activePlayer.silver < cost) { logBox.innerHTML = `Не хватает серебра!`; logBox.className = "forge-log log-error"; logBox.classList.remove('hidden'); return; }
-    activePlayer.silver -= cost; activePlayer.equipment[itemName] += 1;
-    logBox.innerHTML = `Улучшено до ${activePlayer.equipment[itemName]} уровня!`; logBox.className = "forge-log log-success"; logBox.classList.remove('hidden');
-    calculateStats(); saveData(); updateForgeUI(); updateGameUI();
-}
-
 function openDungeonMenu() {
     const container = document.getElementById('dungeon-list-container'); container.innerHTML = "";
     dungeonDatabase.forEach((dung, idx) => {
@@ -359,6 +347,7 @@ function startAdventure() {
     currentBattleType = "adventure"; currentMonsterIndex = activePlayer.currentMonsterIndex; loadMonster(currentMonsterIndex);
     document.getElementById('battle-log').className = "hidden"; resetBattleButtons(); openGameScreen('adventure-battle-screen');
 }
+
 function loadMonster(index) {
     if (index >= monsterDatabase.length) { activePlayer.battleCircle += 1; activePlayer.currentMonsterIndex = 0; index = 0; currentMonsterIndex = 0; saveData(); }
     const dbMonster = monsterDatabase[index]; const circle = activePlayer.battleCircle;
@@ -459,7 +448,7 @@ function createClan() {
     if (localStorage.getItem('rpg_clan_' + clanNameInput)) { return showGameAlert("Такой клан уже существует!"); }
     if (activePlayer.silver < 1000) { return showGameAlert("Недостаточно серебра! Требуется 1,000 🪙"); }
 
-    activePlayer.silver -= 10000; activePlayer.clanName = clanNameInput;
+    activePlayer.silver -= 1000; activePlayer.clanName = clanNameInput;
     const clanData = { name: clanNameInput, level: 1, exp: 0, gold: 0, about: "Приветствуем воинов Хаоса!", logo: "clan.png", owner: activePlayer.username };
     localStorage.setItem('rpg_clan_' + clanNameInput, JSON.stringify(clanData));
     saveData(); updateGameUI(); updateClanUI(); openGameScreen('clan-main-screen');
