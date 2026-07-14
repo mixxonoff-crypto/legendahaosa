@@ -42,7 +42,7 @@ const dungeonDatabase = [
     { name: "Хранитель Бездны", hp: 700000000, maxHp: 700000000, attack: 3000000, image: "abyss_guardian.jpg", exp: 40000, silver: 300000, icon: "💀", reqLvl: 160, qText: "Сердце Бездны", qClass: "q-black" },
     { name: "Диабло", hp: 1500000000, maxHp: 1500000000, attack: 5000000, image: "dia.jpg", exp: 50000, silver: 400000, icon: "👹", reqLvl: 180, qText: "Пылающий Ад", qClass: "q-epic" },
     { name: "Владыка Преисподней", hp: 3000000000, maxHp: 3000000000, attack: 8000000, image: "dia1.jpg", exp: 65000, silver: 550000, icon: "🔥", reqLvl: 200, qText: "Сердце Преисподней", qClass: "q-dark" },
-    { name: "Архидемон", hp: 6500000000, maxHp: 6500000000, attack: 12000000, image: "dia2.jpg", exp: 80000, silver: 750000, icon: "👿", reqLvl: 220, qText: "Гробница Падших", qClass: "q-black" },
+    { name: "Архангел", hp: 6500000000, maxHp: 6500000000, attack: 12000000, image: "dia2.jpg", exp: 80000, silver: 750000, icon: "👿", reqLvl: 220, qText: "Гробница Падших", qClass: "q-black" },
     { name: "Принц Лжи", hp: 12000000000, maxHp: 12000000000, attack: 18000000, image: "dia3.jpg", exp: 100000, silver: 1000000, icon: "👁️", reqLvl: 240, qText: "Искаженная Реальность", qClass: "q-chaotic" },
     { name: "Первородное Зло", hp: 25000000000, maxHp: 25000000000, attack: 30000000, image: "dia4.jpg", exp: 130000, silver: 1500000, icon: "🌋", reqLvl: 260, qText: "Исток Тьмы", qClass: "q-ancient" },
     { name: "Вестник Апокалипсиса", hp: 50000000000, maxHp: 50000000000, attack: 45000000, image: "via.jpg", exp: 170000, silver: 2200000, icon: "☄️", reqLvl: 280, qText: "Угасающий Мир", qClass: "q-dark" },
