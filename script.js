@@ -21,7 +21,7 @@ const monsterDatabase = [
     { name: "Кентавр", hp: 5000, maxHp: 5000, attack: 230, image: "centaur.jpg", exp: 550, silver: 320, icon: "🏹" },
     { name: "Ведьма", hp: 6500, maxHp: 6500, attack: 290, image: "witch.jpg", exp: 700, silver: 420, icon: "🧹" },
     { name: "Ниндзя", hp: 8500, maxHp: 8500, attack: 360, image: "ninja.jpg", exp: 900, silver: 550, icon: "🥷" },
-    { name: "Тролль", hp: 11000, maxHp: 11000, attack: 450, image: "troll.jpg", exp: 1150, silver: 700, icon: "👹" }
+    { name: "Тролль", hp: 11000, maxHp: 11000, attack: 450, image: "troll.jpg", exp: 1150, silver: 700, icon: "👹" },
 ];
 
 const dungeonDatabase = [
