@@ -665,15 +665,19 @@ let chaosBossState = {
 // Функция входа в Бездну Хаоса
 function openChaosAbyssScreen() {
     if (!activePlayer) return;
-    
+
     // Подгружаем состояние босса при входе (жив или нет)
     const storedState = localStorage.getItem('rpg_chaos_boss');
     if (storedState) {
         chaosBossState = JSON.parse(storedState);
     } else {
         // Если босс запускается впервые в этом часу
+        let playerAttack = activePlayer.attack || 15000;
+        let balancedHp = playerAttack * 15; 
+
         chaosBossState.isSpawned = true;
-        chaosBossState.hp = chaosBossState.maxHp;
+        chaosBossState.maxHp = balancedHp;
+        chaosBossState.hp = balancedHp;
         chaosBossState.hasChest = false;
         saveBossState();
     }
