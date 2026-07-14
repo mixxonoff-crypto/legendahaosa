@@ -45,8 +45,12 @@ const dungeonDatabase = [
     { name: "Архидемон", hp: 6500000000, maxHp: 6500000000, attack: 12000000, image: "dia2.jpg", exp: 80000, silver: 750000, icon: "👿", reqLvl: 220, qText: "Гробница Падших", qClass: "q-black" },
     { name: "Принц Лжи", hp: 12000000000, maxHp: 12000000000, attack: 18000000, image: "dia3.jpg", exp: 100000, silver: 1000000, icon: "👁️", reqLvl: 240, qText: "Искаженная Реальность", qClass: "q-chaotic" },
     { name: "Первородное Зло", hp: 25000000000, maxHp: 25000000000, attack: 30000000, image: "dia4.jpg", exp: 130000, silver: 1500000, icon: "🌋", reqLvl: 260, qText: "Исток Тьмы", qClass: "q-ancient" }
+{ name: "Вестник Апокалипсиса", hp: 50000000000, maxHp: 50000000000, attack: 45000000, image: "via.jpg", exp: 170000, silver: 2200000, icon: "☄️", reqLvl: 280, qText: "Угасающий Мир", qClass: "q-dark" },
+    { name: "Небесный Жнец", hp: 100000000000, maxHp: 100000000000, attack: 70000000, image: "via1.jpg", exp: 220000, silver: 3000000, icon: "⚔️", reqLvl: 300, qText: "Небесный Предел", qClass: "q-divine" },
+    { name: "Император Пустоты", hp: 220000000000, maxHp: 220000000000, attack: 110000000, image: "via2.jpg", exp: 280000, silver: 4000000, icon: "🔮", reqLvl: 320, qText: "Глубины Разлома", qClass: "q-black" },
+    { name: "Звездный Пожиратель", hp: 450000000000, maxHp: 450000000000, attack: 180000000, image: "via3.jpg", exp: 350000, silver: 5500000, icon: "🌌", reqLvl: 340, qText: "Космический Ужас", qClass: "q-mythic" },
+    { name: "Абсолютный Хаос", hp: 1000000000000, maxHp: 1000000000000, attack: 300000000, image: "via4.jpg", exp: 450000, silver: 8000000, icon: "🌀", reqLvl: 360, qText: "Колыбель Искажения", qClass: "q-chaotic" },
 ];
-
 
 let currentMonster = null;
 let currentMonsterIndex = 0;
