@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Легенда Хаоса</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-container">
+        
+        <!-- Главный экран -->
+        <div id="main-screen">
+            <h1>Легенда Хаоса</h1>
+            <p class="game-description">
+                Окунись в мрачный мир хаоса, где каждый шаг может стать последним. 
+                Исследуй заброшенные земли, сражайся с чудовищами, собирай редкие артефакты 
+                и впиши своё имя в историю. Станешь ли ты великим героем или сгинешь во тьме? 
+                Твой путь начинается здесь.
+            </p>
+            <img src="fant.jpg" alt="Легенда Хаоса" class="main-image">
+            <div class="auth-buttons">
+                <button class="btn" onclick="openScreen('login-screen')">Вход</button>
+                <button class="btn" onclick="openScreen('register-screen')">Регистрация</button>
+            </div>
+        </div>
+
+        <!-- Экран Входа -->
+        <div id="login-screen" class="form-screen hidden">
+            <h2>Вход в игру</h2>
+            <div class="input-group">
+                <input type="text" id="login-username" placeholder="Введите никнейм">
+                <input type="password" id="login-password" placeholder="Введите пароль">
+            </div>
+            <div class="auth-buttons">
+                <button class="btn btn-primary" onclick="handleLogin()">Войти</button>
+                <button class="btn btn-secondary" onclick="openScreen('main-screen')">Назад</button>
+            </div>
+        </div>
+
+        <!-- Экран Регистрации -->
+        <div id="register-screen" class="form-screen hidden">
+            <h2>Регистрация</h2>
+            <div class="input-group">
+                <input type="text" id="reg-username" placeholder="Придумайте никнейм">
+                <input type="password" id="reg-password" placeholder="Придумайте пароль">
+            </div>
+            <div class="auth-buttons">
+                <button class="btn btn-primary" onclick="handleRegister()">Создать персонажа</button>
+                <button class="btn btn-secondary" onclick="openScreen('main-screen')">Назад</button>
+            </div>
+        </div>
+
+        <!-- Игровой контейнер (после авторизации) -->
+        <div id="game-container" class="hidden">
+            
+            <!-- Верхний инфо-бар игрока -->
+            <div class="top-player-bar-container">
+                <div class="top-player-bar">
+                    ❤️ <span id="display-hp">100</span> ⚡ <span id="display-energy">100</span>
+                </div>
+                <div class="exp-bar-container">
+                    <div id="exp-bar-fill" class="exp-bar-fill">
+                        <span style="position: absolute; width: 100%; text-align: center; left: 0; font-size: 9px; color: #fff; text-shadow: 1px 1px 1px #000; font-weight: bold;">
+                            Exp: <span id="display-exp">0</span> / <span id="display-next-exp">100</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Главное меню игры -->
+            <div id="game-menu-screen">
+                <div class="screen-title-game">Легенда Хаоса</div>
+                <div class="image-container">
+                    <img src="fant.jpg" alt="Легенда Хаоса" class="main-image">
+                </div>
+                
+                <div id="daily-chest-block" class="daily-reward-box">
+                    <span id="daily-chest-status">🎁 Ваша ежедневная награда готова!</span>
+                    <button id="daily-chest-btn" class="btn-chest" onclick="showChestModal()">Получить награду</button>
+                </div>
+
+                <div class="game-buttons">
+                    <button class="btn btn-adventure" onclick="startAdventure()">⚔️ Приключения</button>
+
+                    <!-- КНОПКА РЕЖИМА ПРЕВОСХОДСТВО -->
+                    <button id="menu-supremacy-btn" class="btn" style="background: #2b2203; border-color: #5e4c10; color: #8c7320;" onclick="openSupremacyScreen()">
+                        👑 Превосходство (Чт. 19:00)
+                    </button>
+
+                    <!-- СИСТЕМА ОБЩЕНИЯ И РАЗВЛЕЧЕНИЙ -->
+                    <button class="btn" style="background: #113511; border-color: #1e5a1e; color: #7fe07f;" onclick="openChatScreen()">💬 Беседка проекта</button>
+                    <button class="btn" style="background: #3e270f; border-color: #5c3b16; color: #ffae19;" onclick="openTavernScreen()">🎲 Таверна Гоблинов</button>
+
+                    <!-- КНОПКА ПЕРЕХОДА НА АРЕНУ ХАОСА -->
+                    <button class="btn" style="background: #5c0000; border-color: #990000; color: #ff9999;" onclick="openArenaScreen()">🏟️ Арена Хаоса</button>
+                    
+                    <!-- КНОПКА ЕЖЕДНЕВНЫХ ЗАДАНИЙ -->
+                    <button class="btn btn-primary" style="background: #1a1a3a; border-color: #3a3a8a; color: #ffffff;" onclick="openQuestsScreen()">📜 Ежедневные Задания</button>
+
+                    <button class="btn btn-forge" style="background: #4a3319; border-color: #6e4a24;" onclick="openTrainingScreen()">🏋️ Тренировка</button>
+                    <button class="btn btn-dungeon" onclick="openDungeonMenu()">😈 Подземелье</button>
+                    <button class="btn" style="background: #3a005c; border-color: #5c0099; color: #e0b0ff;" onclick="openChaosAbyssScreen()">🌌 Бездна Хаоса</button>
+                    <button class="btn btn-clan" onclick="openClanMenu()">🛡️ Клан</button>
+                    <button class="btn btn-profile" onclick="openProfileScreen()">👤 Профиль</button>
+                    <button class="btn btn-secondary" onclick="logout()">Выйти из игры</button>
+                </div>
+
+                <!-- ССЫЛКА НА ФОРУМ В САМОМ НИЗУ МЕНЮ -->
+                <div style="text-align: center; margin-top: 25px; margin-bottom: 15px;">
+                    <span onclick="openForumScreen()" style="color: #ffd700; text-decoration: underline; cursor: pointer; font-size: 14px; font-weight: bold; letter-spacing: 0.5px;">
+                        💬 Форум проекта
+                    </span>
+                </div>
+            </div>
+
+            <!-- Экран тренировки снаряжения -->
+            <div id="training-screen" class="hidden">
+                <div class="screen-title">🏋️ Тренировочный Зал</div>
+                <div class="image-container">
+                    <img src="kuznec.jpg" class="main-image" alt="Кузнец">
+                </div>
+                
+                <div id="training-msg" class="hidden" style="padding: 10px; margin: 0 10px 10px 10px; border-radius: 4px; font-size: 13px; font-weight: bold; text-align: center;"></div>
+                
+                <div class="forge-list">
+                    <!-- Меч -->
+                    <div class="forge-item" style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #222; margin-bottom: 8px; border-radius: 4px; border: 1px solid #333;">
+                        <img src="mechik.png" class="item-icon" style="width: 50px; height: 50px; object-fit: contain; margin-right: 10px;">
+                        <div class="item-info" style="flex-grow: 1; text-align: left;">
+                            <div class="item-name-row" style="font-weight: bold; color: #ffae19;">Острый Меч</div>
+                            <div style="font-size: 11px; color: #aaa;">Уровень: <span id="train-level-sword">0</span></div>
+                            <div style="font-size: 11px; color: #4caf50;">Бонус: +<span id="train-bonus-sword">0</span> к атаке</div>
+                        </div>
+                        <button class="btn btn-primary" id="btn-train-sword" onclick="upgradeEquipment('sword')" style="padding: 6px 12px; font-size: 12px; width: auto;">
+                            Улучшить за <span id="price-train-sword">15</span> 🪙
+                        </button>
+                    </div>
+
+                    <!-- Броня -->
+                    <div class="forge-item" style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #222; margin-bottom: 8px; border-radius: 4px; border: 1px solid #333;">
+                        <img src="arms.png" class="item-icon" style="width: 50px; height: 50px; object-fit: contain; margin-right: 10px;">
+                        <div class="item-info" style="flex-grow: 1; text-align: left;">
+                            <div class="item-name-row" style="font-weight: bold; color: #ffae19;">Тяжелая Броня</div>
+                            <div style="font-size: 11px; color: #aaa;">Уровень: <span id="train-level-armor">0</span></div>
+                            <div style="font-size: 11px; color: #4caf50;">Бонус: +<span id="train-bonus-armor">0</span> к HP</div>
+                        </div>
+                        <button class="btn btn-primary" id="btn-train-armor" onclick="upgradeEquipment('armor')" style="padding: 6px 12px; font-size: 12px; width: auto;">
+                            Улучшить за <span id="price-train-armor">15</span> 🪙
+                        </button>
+                    </div>
+
+                    <!-- Щит -->
+                    <div class="forge-item" style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #222; margin-bottom: 8px; border-radius: 4px; border: 1px solid #333;">
+                        <img src="shit.png" class="item-icon" style="width: 50px; height: 50px; object-fit: contain; margin-right: 10px;">
+                        <div class="item-info" style="flex-grow: 1; text-align: left;">
+                            <div class="item-name-row" style="font-weight: bold; color: #ffae19;">Стальной Щит</div>
+                            <div style="font-size: 11px; color: #aaa;">Уровень: <span id="train-level-shield">0</span></div>
+                            <div style="font-size: 11px; color: #4caf50;">Бонус: +<span id="train-bonus-shield">0</span> к защите</div>
+                        </div>
+                        <button class="btn btn-primary" id="btn-train-shield" onclick="upgradeEquipment('shield')" style="padding: 6px 12px; font-size: 12px; width: auto;">
+                            Улучшить за <span id="price-train-shield">15</span> 🪙
+                        </button>
+                    </div>
+                </div>
+
+                <div class="game-buttons" style="margin-top: 15px;">
+                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">↩️ На главную</button>
+                </div>
+            </div>
+
+            <!-- Экран приключений и битвы -->
+            <div id="adventure-battle-screen" class="hidden">
+                <div id="battle-log" class="hidden"></div>
+                <div class="monster-bar">
+                    <div class="monster-title" id="monster-name">Волк</div>
+                    <div>❤️ <span id="monster-hp">0</span>/<span id="monster-max-hp">0</span></div>
+                </div>
+                <div class="image-container">
+                    <img src="wolf.jpg" alt="Монстр" class="main-image" id="monster-img">
+                    <div id="damage-effect-zone"></div>
+                </div>
+                <div class="game-buttons" id="battle-controls" style="margin-bottom: 10px;"></div>
+                
+                <div class="combat-params-box">
+                    <div class="player-name">Ваши Параметры</div>
+                    <div class="stats-grid font-combat">
+                        <div>⚔️ Атака: <span class="text-orange" id="display-attack">15</span></div>
+                        <div>🛡️ Защита: <span class="text-blue" id="display-defense">10</span></div>
+                    </div>
+                </div>
+                <div class="game-buttons" id="battle-leave-control" style="margin-top: 10px;"></div>
+            </div>
+
+            <!-- Кузница -->
+            <div id="forge-screen" class="hidden">
+                <div class="screen-title">⚒️ Кузница Хаоса</div>
+                <div class="image-container"><img src="forge.jpg" class="main-image"></div>
+                <div id="forge-log" class="hidden"></div>
+                <div class="forge-list">
+                    <div style="text-align: center; font-size: 13px; color: #aaa; padding: 20px;">
+                        Кузница пуста. Чертежи утеряны во тьме...
+                    </div>
+                </div>
+                <div class="game-buttons" style="margin-top: 15px;">
+                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">↩️ Назад</button>
+                </div>
+            </div>
+
+            <!-- Подземелье -->
+            <div id="dungeon-screen" class="hidden">
+                <div class="screen-title">😈 Подземелье</div>
+                <div class="image-container"><img src="podzem.jpg" class="main-image"></div>
+                <div class="forge-list" id="dungeon-list-container"></div>
+                <div class="game-buttons" style="margin-top: 10px;">
+                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">↩️ Назад</button>
+                </div>
+            </div>
+
+            <!-- Экран "Бездна Хаоса" -->
+            <div id="chaos-abyss-screen" class="hidden">
+                <div class="screen-title" style="color: #e0b0ff; text-shadow: 0 0 10px #5c0099;">🌌 Бездна Хаоса</div>
+                
+                <!-- Таймер локации -->
+                <div id="abyss-timer-text" style="text-align: center; font-size: 13px; margin-bottom: 10px; color: #aaa; background: #111; padding: 6px; border: 1px solid #222; border-radius: 4px;">
+                    Проверка межпространственного времени...
+                </div>
+
+                <!-- Динамическая зона босса Бездны -->
+                <div id="abyss-content" style="text-align: center; margin: 15px 0;">
+                    <div style="padding: 20px; color: #666; font-size: 13px;">Загрузка энергии Бездны...</div>
+                </div>
+
+                <div class="game-buttons" style="margin-top: 15px;">
+                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">↩️ Назад</button>
+                </div>
+            </div>
+
+            <!-- ======================================================================= -->
+            <!-- ЭКРАН "АРЕНА ХАОСА" -->
+            <!-- ======================================================================= -->
+            <div id="arena-screen" class="hidden">
+                <div class="screen-title" style="color: #ff3333; text-shadow: 0 0 10px #aa0000; text-align: center;">🏟️ Арена Хаоса</div>
+                
+                <!-- ЗОНА СРАЖЕНИЯ (VS) -->
+                <div class="arena-vs-container" style="display: flex; justify-content: space-around; align-items: center; background: #111; padding: 15px; border: 1px solid #222; border-radius: 4px; margin-bottom: 10px;">
+                    <div class="arena-fighter" style="text-align: center; width: 40%;">
+                        <img src="profile.jpg" id="arena-player-avatar" style="width: 70px; height: 90px; object-fit: cover; border: 1.5px solid #ffae19; border-radius: 4px;">
+                        <div id="arena-player-name" style="font-size: 12px; font-weight: bold; margin-top: 5px; color: #ffae19; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Игрок</div>
+                    </div>
+                    <div style="font-size: 18px; font-weight: bold; color: #ff3333; font-style: italic; text-shadow: 0 0 5px #000;">vs</div>
+                    <div class="arena-fighter" style="text-align: center; width: 40%;">
+                        <img src="profile.jpg" id="arena-bot-avatar" style="width: 70px; height: 90px; object-fit: cover; border: 1.5px solid #ff3333; border-radius: 4px;">
+                        <div id="arena-bot-name" style="font-size: 12px; font-weight: bold; margin-top: 5px; color: #ff4d4d; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Бот</div>
+                    </div>
+                </div>
+
+                <!-- КНОПКИ АТАКИ -->
+                <div class="game-buttons" id="arena-controls" style="margin-bottom: 10px;">
+                    <button class="btn btn-attack" onclick="attackArenaBot()">⚔️ В атаку ⚡ 5</button>
+                </div>
+
+                <!-- ПАРАМЕТРЫ ПРОТИВНИКА -->
+                <div class="combat-params-box" style="margin-bottom: 10px; border-color: #5c1111;">
+                    <div class="player-name" id="arena-bot-fullname" style="color: #ff4d4d;">[UA] Бот-Гладиатор</div>
+                    <div class="stats-grid font-combat" style="font-size: 12px;">
+                        <div>⚔️ Атака: <span class="text-orange" id="arena-bot-attack">0</span></div>
+                        <div>❤️ ХП: <span style="color: #ff4d4d;" id="arena-bot-hp">0</span></div>
+                        <div>🛡️ Защита: <span class="text-blue" id="arena-bot-defense">0</span></div>
+                    </div>
+                </div>
+
+                <!-- КНОПКА ВОССТАНОВЛЕНИЯ ЭНЕРГИИ -->
+                <div style="text-align: center; margin-bottom: 12px; font-size: 12px;">
+                    <a href="#" onclick="buyArenaEnergy(); return false;" style="color: #4da6ff; text-decoration: none; font-weight: bold;">⚡ Восстановить энергию</a> 
+                    <span style="color: #666;">(за <span id="arena-energy-price">100</span> серебра)</span>
+                </div>
+
+                <!-- ЛОГ БИТВЫ АРЕНЫ -->
+                <div id="arena-log" class="hidden" style="background: #0d0d0d; border: 1px solid #331111; padding: 10px; border-radius: 4px; font-size: 12px; margin-bottom: 10px; min-height: 40px; text-align: center;"></div>
+
+                <!-- КНОПКА ВЫХОДА -->
+                <div class="game-buttons">
+                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">↩️ На главную</button>
+                </div>
+            </div> <!-- Закрытие экрана Арены -->
+
+            <!-- ======================================================================= -->
+            <!-- ЭКРАН РЕЖИМА ПРЕВОСХОДСТВО -->
+            <!-- ======================================================================= -->
+            <div id="supremacy-screen" class="hidden">
+                <div class="screen-title" style="color: #ffcc00; text-shadow: 0 0 10px #cc9900; text-align: center;">👑 Превосходство Клана</div>
+                
+                <!-- Таймер и статус события -->
+                <div id="supremacy-timer-text" style="text-align: center; font-size: 13px; margin-bottom: 10px; color: #aaa; background: #111; padding: 6px; border: 1px solid #222; border-radius: 4px;">
+                    Проверка времени проведения...
+                </div>
+
+                <!-- Инфо-панель заработка игрока -->
+                <div class="profile-stage-box" style="background: #1a150d; border: 1px solid #ffd700; margin-bottom: 15px; text-align: center;">
+                    ⚔️ Повержено врагов: <span id="sup-display-kills" style="color: #ff3c3c; font-weight: bold;">0</span> | 
+                    🟡 Накоплено для Клана: <span id="sup-display-gold" style="color: #ffd700; font-weight: bold;">0</span>
+                </div>
+
+                <!-- ЗОНА СРАЖЕНИЯ (VS) -->
+                <div class="arena-vs-container" style="display: flex; justify-content: space-around; align-items: center; background: #111; padding: 15px; border: 1px solid #222; border-radius: 4px; margin-bottom: 10px;">
+                    <div class="arena-fighter" style="text-align: center; width: 40%;">
+                        <img src="profile.jpg" id="sup-player-avatar" style="width: 70px; height: 90px; object-fit: cover; border: 1.5px solid #ffae19; border-radius: 4px;">
+                        <div id="sup-player-name" style="font-size: 12px; font-weight: bold; margin-top: 5px; color: #ffae19; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Игрок</div>
+                    </div>
+                    <div style="font-size: 18px; font-weight: bold; color: #ffcc00; font-style: italic; text-shadow: 0 0 5px #000;">VS</div>
+                    <div class="arena-fighter" style="text-align: center; width: 40%;">
+                        <img src="profile.jpg" id="sup-enemy-avatar" style="width: 70px; height: 90px; object-fit: cover; border: 1.5px solid #ff3333; border-radius: 4px;">
+                        <div id="sup-enemy-name" style="font-size: 12px; font-weight: bold; margin-top: 5px; color: #ff4d4d; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Защитник</div>
+                    </div>
+                </div>
+
+                <!-- КНОПКИ АТАКИ -->
+                <div class="game-buttons" id="supremacy-controls" style="margin-bottom: 10px;">
+                    <button class="btn btn-attack" style="background: #806000; border-color: #ffd700;" onclick="attackSupremacyEnemy()">⚔️ Атаковать защитника ⚡ 5</button>
+                </div>
+
+                <!-- ПАРАМЕТРЫ ПРОТИВНИКА -->
+                <div class="combat-params-box" style="margin-bottom: 10px; border-color: #53410c;">
+                    <div class="player-name" id="sup-enemy-fullname" style="color: #ff9900;">Защитник Олимпа</div>
+                    <div class="stats-grid font-combat" style="font-size: 12px;">
+                        <div>⚔️ Атака: <span class="text-orange" id="sup-enemy-attack">0</span></div>
+                        <div>❤️ ХП: <span style="color: #ff4d4d;" id="sup-enemy-hp">0</span> / <span id="sup-enemy-maxhp">0</span></div>
+                        <div>🛡️ Защита: <span class="text-blue" id="sup-enemy-defense">0</span></div>
+                    </div>
+                </div>
+
+                <!-- ЛОГ БИТВЫ ПРЕВОСХОДСТВА -->
+                <div id="sup-log" class="hidden" style="background: #0d0d0d; border: 1px solid #33250c; padding: 10px; border-radius: 4px; font-size: 12px; margin-bottom: 10px; min-height: 40px; text-align: center;"></div>
+
+                <!-- КНОПКА ВЫХОДА -->
+                <div class="game-buttons">
+                    <button class="btn btn-secondary" onclick="leaveSupremacy()">🏃 Завершить и внести золото</button>
+                </div>
+            </div> <!-- Закрытие Превосходства -->
+
+            <!-- КЛАНОВЫЕ ЭКРАНЫ -->
+            <div id="clan-none-screen" class="hidden">
+                <div class="screen-title">🛡️ Клановая Цитадель</div>
+                <div class="image-container"><img src="clan.png" class="main-image"></div>
+                <p class="game-description" style="text-align: center;">Вы не состоите в клане. Вы можете основать свой собственный клан, чтобы объединить воинов Хаоса и открыть доступ к Золотой Шахте!</p>
+                <div class="combat-params-box" style="margin-bottom: 12px;">
+                    <div class="player-name">Стоимость основания</div>
+                    <div style="text-align: center; padding: 5px 0;">🪙 1,000 серебра</div>
+                </div>
+                <div class="form-screen" style="display: flex; flex-direction: column; gap: 8px;">
+                    <input type="text" id="clan-create-name" placeholder="Введите название клана" style="width:100%; background:#1a1a1a; color:#fff; border:1px solid #333; padding:12px; box-sizing:border-box; border-radius:4px;">
+                    <button class="btn btn-primary" onclick="createClan()">Основать Клан</button>
+                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">↩️ Назад</button>
+                </div>
+            </div>
+
+            <!-- Главное меню клана -->
+            <div id="clan-main-screen" class="hidden">
+                <div class="screen-title-game" id="clan-display-name">Название Клана</div>
+                <div class="profile-avatar-container">
+                    <img src="clan.png" id="clan-display-img" style="width: 120px; height: 120px; border: 2px solid #ffae19; border-radius: 4px; object-fit: cover;">
+                </div>
+                <div class="profile-stage-box">⭐ Уровень Клана: <span id="clan-display-level" class="text-orange">1</span> [<span id="clan-display-exp">0</span>/<span id="clan-display-next-exp">500</span>]</div>
+                
+                <div class="wap-info-box">
+                    <div>📖 <b>Описание:</b> <span id="clan-display-about">Приветствуем воинов!</span></div>
+                    <div>💰 <b>Казна Клана:</b> <span id="clan-display-gold" style="color: #ffd700; font-weight: bold;">0</span> Золота</div>
+                </div>
+
+                <!-- СТАТИСТИКА ВКЛАДА УЧАСТНИКОВ -->
+                <div style="text-align: center; margin-bottom: 12px;">
+                    <button onclick="toggleClanStats()" class="btn" style="background: linear-gradient(135deg, #4a3b8c, #2b1f5c); border: 1px solid #725cb0; color: #e0b0ff; padding: 8px 16px; font-size: 13px; width: auto;">📊 Статистика Вклада</button>
+                </div>
+
+                <!-- ТАБЛИЦА СТАТИСТИКИ -->
+                <div id="clan-stats-block" class="hidden" style="background-color: #0d0d0d; border: 1px solid #222; padding: 12px; border-radius: 4px; margin: 10px; text-align: left;">
+                    <div style="font-weight: bold; color: #ffae19; text-align: center; margin-bottom: 8px; font-size: 13px;">📈 Вклад участников</div>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #333; color: #888;">
+                                    <th style="padding: 4px; text-align: left;">Воин</th>
+                                    <th style="padding: 4px; text-align: right; color: #ffd700;">🪙 Золото</th>
+                                    <th style="padding: 4px; text-align: right; color: #e0b0ff;">✨ Опыт</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clan-stats-list"></tbody>
+                        </table>
+                    </div>
+                    <div id="clan-reset-stats-container" class="hidden" style="text-align: center; margin-top: 10px;">
+                        <button onclick="resetClanStats()" class="btn btn-attack" style="background: #5c0000; border-color: #990000; padding: 4px 8px; font-size: 10px; width: auto; color: #ff9999;">🔄 Обнулить Статистику</button>
+                    </div>
+                </div>
+
+                <div class="game-buttons" style="margin-top: 12px;">
+                    <button class="btn" style="background: #2b113f; border-color: #531e80; color: #df7fe0;" onclick="openClanTower()">🏛️ Башня Клана</button>
+                    <button class="btn btn-adventure" onclick="openGoldMine()">⛏️ Золотая Шахта</button>
+                    <button class="btn btn-forge" onclick="openDepositSilverModal()">🪙 Положить Серебро</button>
+                    <button class="btn btn-profile" onclick="openClanMembers()">👤 Участники (<span id="clan-display-count">1</span>/100)</button>
+                    <button class="btn btn-primary" onclick="openClanSettings()">⚙️ Настройки Клана</button>
+                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">↩️ На главную</button>
+                    <button class="btn btn-attack" style="margin-top: 15px; background: #5c0000; border-color: #990000;" onclick="leaveClan()">🏃 Покинуть Клан</button>
+                </div>
+            </div>
+
+            <!-- ЭКРАН "БАШНЯ КЛАНА" -->
+            <div id="clan-tower-screen" class="hidden">
+                <div class="screen-title" style="color: #df7fe0; text-shadow: 0 0 10px #531e80;">🏛️ Башня Клана</div>
+                <p class="game-description" style="text-align: center; margin-bottom: 15px;">
+                    Улучшайте древние алтари за Золото из казны клана, чтобы получить постоянные бонусы для всех участников!
+                </p>
+                <div id="tower-msg" class="hidden" style="padding: 10px; margin: 0 10px 10px 10px; border-radius: 4px; font-size: 13px; font-weight: bold; text-align: center;"></div>
+                <div class="profile-stage-box" style="margin-bottom: 15px;">💰 Золото в казне: <span id="tower-clan-gold" style="color: #ffd700; font-weight: bold;">0</span></div>
+                
+                <div class="forge-list">
+                    <!-- Алтарь Войны -->
+                    <div class="forge-item" style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #1a1a1a; margin-bottom: 8px; border-radius: 4px; border: 1px solid #333;">
+                        <img src="altar1.png" class="item-icon" style="width: 55px; height: 55px; object-fit: cover; margin-right: 10px; border-color: #ff3c3c;">
+                        <div class="item-info" style="flex-grow: 1; text-align: left;">
+                            <div class="item-name-row" style="font-weight: bold; color: #ff3c3c;">Алтарь Войны</div>
+                            <div style="font-size: 11px; color: #aaa;">Уровень: <span id="altar-lvl-war">0</span></div>
+                            <div style="font-size: 11px; color: #ff4d4d; font-weight: bold;">Бонус: +<span id="altar-bonus-war">0</span>% ко всем статам</div>
+                        </div>
+                        <button class="btn btn-primary" id="btn-upgrade-war" onclick="upgradeAltar('altarWar')" style="padding: 6px 12px; font-size: 11px; width: auto; background: #a30000; border-color: #ff3c3c; color: #fff;">
+                            Улучшить за <span id="altar-price-war">100</span> 🟡
+                        </button>
+                    </div>
+
+                    <!-- Алтарь Мудрости -->
+                    <div class="forge-item" style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #1a1a1a; margin-bottom: 8px; border-radius: 4px; border: 1px solid #333;">
+                        <img src="altar2.png" class="item-icon" style="width: 55px; height: 55px; object-fit: cover; margin-right: 10px; border-color: #9c27b0;">
+                        <div class="item-info" style="flex-grow: 1; text-align: left;">
+                            <div class="item-name-row" style="font-weight: bold; color: #9c27b0;">Алтарь Мудрости</div>
+                            <div style="font-size: 11px; color: #aaa;">Уровень: <span id="altar-lvl-wisdom">0</span></div>
+                            <div style="font-size: 11px; color: #df7fe0; font-weight: bold;">Бонус: +<span id="altar-bonus-wisdom">0</span>% к опыту везде</div>
+                        </div>
+                        <button class="btn btn-primary" id="btn-upgrade-wisdom" onclick="upgradeAltar('altarWisdom')" style="padding: 6px 12px; font-size: 11px; width: auto; background: #6a1b9a; border-color: #9c27b0; color: #fff;">
+                            Улучшить за <span id="altar-price-wisdom">100</span> 🟡
+                        </button>
+                    </div>
+
+                    <!-- Алтарь Богатства -->
+                    <div class="forge-item" style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: #1a1a1a; margin-bottom: 8px; border-radius: 4px; border: 1px solid #333;">
+                        <img src="altar3.png" class="item-icon" style="width: 55px; height: 55px; object-fit: cover; margin-right: 10px; border-color: #ffd700;">
+                        <div class="item-info" style="flex-grow: 1; text-align: left;">
+                            <div class="item-name-row" style="font-weight: bold; color: #ffd700;">Алтарь Богатства</div>
+                            <div style="font-size: 11px; color: #aaa;">Уровень: <span id="altar-lvl-wealth">0</span></div>
+                            <div style="font-size: 11px; color: #ffd700; font-weight: bold;">Бонус: +<span id="altar-bonus-wealth">0</span> к добыче золота</div>
+                        </div>
+                        <button class="btn btn-primary" id="btn-upgrade-wealth" onclick="upgradeAltar('altarWealth')" style="padding: 6px 12px; font-size: 11px; width: auto; background: #cc7a00; border-color: #ffd700; color: #fff;">
+                            Улучшить за <span id="altar-price-wealth">100</span> 🟡
+                        </button>
+                    </div>
+                </div>
+                <div class="game-buttons" style="margin-top: 15px;">
+                    <button class="btn btn-secondary" onclick="openClanMenu()">↩️ Назад в клан</button>
+                </div>
+            </div>
+
+            <!-- Настройки клана -->
+            <div id="clan-settings-screen" class="hidden">
+                <div class="screen-title">⚙️ Настройки Клана</div>
+                <div class="form-screen" style="display: flex; flex-direction: column; gap: 10px;">
+                    <div>
+                        <label style="font-size: 12px; color: #888;">Название Клана:</label>
+                        <input type="text" id="clan-edit-name" style="width:100%; background:#1a1a1a; color:#fff; border:1px solid #333; padding:8px; box-sizing:border-box;">
+                    </div>
+                    <div>
+                        <label style="font-size: 12px; color: #888;">Описание Клана:</label>
+                        <textarea id="clan-edit-about" rows="3" style="width:100%; background:#1a1a1a; color:#fff; border:1px solid #333; padding:8px; box-sizing:border-box; resize: none;"></textarea>
+                    </div>
+                    <div>
+                        <label style="font-size: 12px; color: #888;">Грузить герб/фото (Кликни для смены):</label>
+                        <button class="btn" onclick="triggerClanLogoUpload()">Выбрать картинку</button>
+                        <input type="file" id="clan-logo-input" class="hidden" accept="image/*" onchange="handleClanLogoUpload(event)">
+                    </div>
+                    <button class="btn btn-primary" onclick="saveClanSettings()">Сохранить изменения</button>
+                    <button class="btn btn-secondary" onclick="openGameScreen('clan-main-screen')">Назад</button>
+                </div>
+            </div>
+
+            <!-- Список участников -->
+            <div id="clan-members-screen" class="hidden">
+                <div class="screen-title">👤 Участники Клана</div>
+                <div class="wap-info-box" id="clan-members-list" style="max-height: 300px; overflow-y: auto;"></div>
+                <div class="game-buttons" style="margin-top: 10px;">
+                    <button class="btn btn-secondary" onclick="openGameScreen('clan-main-screen')">↩️ Назад</button>
+                </div>
+            </div>
+
+            <!-- ЭКРАН ЕЖЕДНЕВНЫХ ЗАДАНИЙ -->
+            <div id="quests-screen" class="hidden">
+                <div class="quests-header" style="background: #111; border-bottom: 2px solid #222; padding: 12px 10px; font-size: 16px; font-weight: bold; color: #ffd700; text-align: center;">
+                    📜 Ежедневные Поручения
+                </div>
+                <div class="quests-container" style="padding: 15px 10px;">
+                    <p style="font-size: 11px; color: #aaa; text-align: center; margin-bottom: 15px;">
+                        Выполняйте задания, чтобы получить <b>сундуки по 100 000 🪙</b>. <br>За выполнение всей цепочки — <b>Супер-Сундук на 1 000 000 🪙</b>!
+                    </p>
+                    <div id="quests-list"></div>
+                    <hr style="border: 0; border-top: 1px solid #222; margin: 20px 0;">
+                    <div id="super-quest-zone" style="background: #161616; border: 1px solid #ffd700; border-radius: 4px; padding: 15px; text-align: center;">
+                        <h3 style="color: #ffd700; margin: 0 0 10px 0; font-size: 15px;">🎁 Финальная Награда дня</h3>
+                        <div id="super-chest-status-text" style="font-size: 12px; color: #ddd; margin-bottom: 12px;">Выполните все 3 задания, чтобы разблокировать сундук!</div>
+                        <button id="super-chest-btn" class="btn btn-primary" style="background: #cc7a00; border-color: #ff9900; width: auto; padding: 8px 20px;" onclick="claimSuperQuestChest()" disabled>
+                            🔒 Супер-Сундук (1м)
+                        </button>
+                    </div>
+                </div>
+                <div style="margin-top: 15px; padding: 0 10px;">
+                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">🏃 На главную</button>
+                </div>
+            </div>
+
+            <!-- Золотая Шахта -->
+            <div id="gold-mine-screen" class="hidden">
+                <div class="screen-title">⛏️ Золотая Шахта Клана</div>
+                <div id="mine-log" class="hidden" style="padding: 8px; border-radius: 4px; font-size: 12px; text-align: center; margin-bottom: 10px;"></div>
+                <div class="image-container"><img src="shaxta.jpg" class="main-image"></div>
+                <p class="game-description" style="text-align: center;">Добывай золото для процветания своего клана! Каждый удар расходует <b>5 энергии</b>.</p>
+                <div class="profile-stage-box" style="margin-bottom: 15px; font-size: 12px; background: #141414;">
+                    📊 Добыто сегодня: <span id="mine-daily-extracted" style="color: #ffd700; font-weight: bold;">0</span> / <span id="mine-daily-limit" style="color: #ffd700; font-weight: bold;">0</span> 🟡
+                </div>
+                <div class="game-buttons" style="margin-bottom: 10px;">
+                    <button class="btn btn-attack" onclick="mineGold()">⛏️ Ударить киркой</button>
+                </div>
+                <div class="game-buttons">
+                    <button class="btn btn-secondary" onclick="openGameScreen('clan-main-screen')">🏃 Выйти из шахты</button>
+                </div>
+            </div>
+
+            <!-- ЭКРАН ФОРУМА -->
+            <div id="forum-screen" class="hidden">
+                <div class="forum-header">
+                    <span class="forum-nav-link" onclick="openForumCategory('main')">Форум</span>
+                    <span id="forum-breadcrumbs"></span>
+                </div>
+                <div class="forum-container">
+                    
+                    <!-- Главная страница форума -->
+                    <div id="forum-main-categories">
+                        <div class="forum-category-item" onclick="openForumCategory('news')">
+                            <span class="forum-icon">📢</span>
+                            <div class="forum-cat-details">
+                                <div class="forum-cat-title">Новости проекта</div>
+                                <div class="forum-cat-desc">Обновления, патчи и важные объявления</div>
+                            </div>
+                        </div>
+                        <div class="forum-category-item" onclick="openForumCategory('rules')">
+                            <span class="forum-icon">📜</span>
+                            <div class="forum-cat-details">
+                                <div class="forum-cat-title">Правила общения и игры</div>
+                                <div class="forum-cat-desc">Кодекс поведения воинов Легенды Хаоса</div>
+                            </div>
+                        </div>
+                        <!-- НОВАЯ КАТЕГОРИЯ: ИДЕИ -->
+                        <div class="forum-category-item" onclick="openForumCategory('ideas')">
+                            <span class="forum-icon">💡</span>
+                            <div class="forum-cat-details">
+                                <div class="forum-cat-title">Идеи и предложения</div>
+                                <div class="forum-cat-desc">Поделись мыслями, как улучшить проект!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Раздел: Новости (КРАСИВЫЙ ПУТЕВОДИТЕЛЬ ПО ЛОКАЦИЯМ) -->
+                    <div id="forum-news-section" class="hidden">
+                        <div class="forum-topic" style="background: transparent; border: none; padding: 0;">
+                            <div class="forum-topic-meta" style="margin-bottom: 10px;">📢 <span class="forum-author">Admin</span>, сегодня в 12:00</div>
+                            <div class="forum-topic-title" style="margin-bottom: 15px; font-size: 16px; color: #ffd700;">Глобальное обновление: Путеводитель по Миру Хаоса!</div>
+                            <p style="font-size: 13px; color: #ccc; margin-bottom: 15px; line-height: 1.4;">Приветствуем, герои! В игру успешно добавлены новые локации и режимы. Ознакомьтесь с полным списком активностей нашего мира:</p>
+
+                            <!-- КАРТОЧКА: ПРИКЛЮЧЕНИЯ -->
+                            <div style="background: #130f0a; border: 1.5px solid #a87034; border-radius: 6px; padding: 12px; margin-bottom: 12px; box-shadow: 0 0 8px rgba(168, 112, 52, 0.15);">
+                                <div style="color: #a87034; font-weight: bold; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">⚔️ Приключения</div>
+                                <div style="font-size: 12px; color: #dfdfdf; line-height: 1.4;">Твой основной путь воина. Сражайся с монстрами круг за кругом, получай золото, серебро и опыт, чтобы повышать свой уровень и открывать новые горизонты силы!</div>
+                            </div>
+
+                            <!-- КАРТОЧКА: ПОДЗЕМЕЛЬЕ -->
+                            <div style="background: #140b17; border: 1.5px solid #b359d4; border-radius: 6px; padding: 12px; margin-bottom: 12px; box-shadow: 0 0 8px rgba(179, 89, 212, 0.15);">
+                                <div style="color: #b359d4; font-weight: bold; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">😈 Подземелья Боссов</div>
+                                <div style="font-size: 12px; color: #dfdfdf; line-height: 1.4;">Особо опасные зоны, доступные по уровню. Сразись с могущественными боссами подземелий ради колоссального количества опыта и огромных мешков с серебром!</div>
+                            </div>
+
+                            <!-- КАРТОЧКА: ТРЕНИРОВОЧНЫЙ ЗАЛ -->
+                            <div style="background: #14110b; border: 1.5px solid #c29d38; border-radius: 6px; padding: 12px; margin-bottom: 12px; box-shadow: 0 0 8px rgba(194, 157, 56, 0.15);">
+                                <div style="color: #c29d38; font-weight: bold; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">🏋️ Тренировочный Зал</div>
+                                <div style="font-size: 12px; color: #dfdfdf; line-height: 1.4;">Место, где куётся твоё превосходство. Трать серебро на тренировку своего Острого Меча, Тяжелой Брони и Стального Щита, чтобы навсегда увеличить боевые характеристики!</div>
+                            </div>
+
+                            <!-- КАРТОЧКА: ЗОЛОТАЯ ШАХТА -->
+                            <div style="background: #0b1411; border: 1.5px solid #2db380; border-radius: 6px; padding: 12px; margin-bottom: 12px; box-shadow: 0 0 8px rgba(45, 179, 128, 0.15);">
+                                <div style="color: #2db380; font-weight: bold; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">⛏️ Золотая Шахта Клана</div>
+                                <div style="font-size: 12px; color: #dfdfdf; line-height: 1.4;">Работа не для слабых! Трать энергию и маши киркой в шахте своего клана, добывая чистое золото напрямую в клановую казну. Помни о суточном лимите добычи!</div>
+                            </div>
+
+                            <!-- КАРТОЧКА: БЕСЕДКА -->
+                            <div style="background: #0b140b; border: 1.5px solid #3eb33e; border-radius: 6px; padding: 12px; margin-bottom: 12px; box-shadow: 0 0 8px rgba(62, 179, 62, 0.15);">
+                                <div style="color: #3eb33e; font-weight: bold; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">💬 Беседка Проекта</div>
+                                <div style="font-size: 12px; color: #dfdfdf; line-height: 1.4;">Наш уютный WAP-уголок для общения. Общайся с другими игроками и местными завсегдатаями. Кликни по нику для быстрого ответа и делись тактиками!</div>
+                            </div>
+
+                            <!-- КАРТОЧКА: ТАВЕРНА ГОБЛИНОВ -->
+                            <div style="background: #16110b; border: 1.5px solid #ffaa00; border-radius: 6px; padding: 12px; margin-bottom: 12px; box-shadow: 0 0 8px rgba(255, 170, 0, 0.15);">
+                                <div style="color: #ffaa00; font-weight: bold; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">🎲  Таверна Гоблинов</div>
+                                <div style="font-size: 12px; color: #dfdfdf; line-height: 1.4;">Опасное и азартное место, где правит удача! Испытай судьбу в классические кости против гоблина Шмыга: делай ставку и удваивай серебро в случае победы!</div>
+                            </div>
+
+                            <!-- КАРТОЧКА: БЕЗДНА ХАОСА -->
+                            <div style="background: #150d0d; border: 1.5px solid #ff4d4d; border-radius: 6px; padding: 12px; margin-bottom: 12px; box-shadow: 0 0 8px rgba(255, 77, 77, 0.15);">
+                                <div style="color: #ff4d4d; font-weight: bold; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">🐉 Бездна Хаоса</div>
+                                <div style="font-size: 12px; color: #dfdfdf; line-height: 1.4;">Каждый час там возрождается Чёрный Дракон. Объединяйтесь с другими игроками, наносите урон и забирайте легендарный сундук с миллионами серебра!</div>
+                            </div>
+
+                            <!-- КАРТОЧКА: АРЕНА ХАОСА -->
+                            <div style="background: #0d121a; border: 1.5px solid #4da6ff; border-radius: 6px; padding: 12px; margin-bottom: 12px; box-shadow: 0 0 8px rgba(77, 166, 255, 0.15);">
+                                <div style="color: #4da6ff; font-weight: bold; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">🏆 Арена Хаоса</div>
+                                <div style="font-size: 12px; color: #dfdfdf; line-height: 1.4;">Сражайтесь с опасными ботами-гладиаторами в честных поединках, оттачивайте боевое мастерство и получайте ценный опыт для себя и своего клана!</div>
+                            </div>
+
+                            <!-- КАРТОЧКА: ПРЕВОСХОДСТВО КЛАНА -->
+                            <div style="background: #16140d; border: 1.5px solid #ffd700; border-radius: 6px; padding: 12px; margin-bottom: 15px; box-shadow: 0 0 8px rgba(255, 215, 0, 0.15);">
+                                <div style="color: #ffd700; font-weight: bold; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">👑 Превосходство Клана</div>
+                                <div style="font-size: 12px; color: #dfdfdf; line-height: 1.4;">Еженедельное масштабное событие! Каждый четверг с 19:00 до 20:00 по Киеву крушите защитников, зарабатывайте чистое золото и пополняйте общую казну своего клана!</div>
+                            </div>
+                            <div style="text-align: right; font-size: 11px; color: #555; margin-top: 10px; margin-right: 5px;">Дата публикации: 15.07.2026</div>
+                        </div>
+                    </div>
+
+                    <!-- Раздел: Правила -->
+                    <div id="forum-rules-section" class="hidden">
+                        <div class="forum-topic">
+                            <div class="forum-topic-meta">👮 <span class="forum-author">Admin</span>, 15.07.2026</div>
+                            <div class="forum-topic-title">1. ЗАПРЕЩАЕТСЯ:</div>
+                            <div class="forum-topic-text">
+                                <p><b>1.1.</b> Размещение сторонних ссылок на сайты и обсуждение сторонних ресурсов и сайтов.</p>
+                                <p><b>1.2.</b> Создание или провокация конфликтной ситуации, бездоказательные обвинения, введение игроков и администрации в заблуждение.</p>
+                                <p><b>1.3.</b> Писать заглавными буквами (КАПСОМ), написание сообщений целиком из заглавных букв.</p>
+                                <p><b>1.4.</b> Написание одинаковых или однотипных сообщений в одном или нескольких топиках или в чате (флуд).</p>
+                                <p><b>1.5.</b> Создание однотипных или одинаковых топиков на форуме проекта (Игры).</p>
+                                <p><b>1.6.</b> Повторное создание на форуме топиков, которые были закрыты или удалены модераторами.</p>
+                                <p><b>1.7.</b> Сообщения о покупке, продаже или передаче любых игровых ценностей за реальные средства.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                                <!-- РАЗДЕЛ: ИДЕИ И ПРЕДЛОЖЕНИЯ -->
+                    <div id="forum-ideas-section" class="hidden">
+                        <!-- Кнопка со смещением вниз (margin-top: 15px) -->
+                        <div style="text-align: left; margin-top: 15px; margin-bottom: 15px; width: 100%;">
+                            <button class="btn btn-adventure" onclick="toggleIdeaForm()" style="width: auto; padding: 10px 20px; font-weight: bold; background: #a87034; border-color: #ffaa00; margin: 0;">
+                                ✍️ Создать топик с идеей
+                            </button>
+                        </div>
+
+                        <div id="new-idea-form-block" class="hidden" style="background: #161411; border: 1.5px solid #ffaa00; padding: 15px; border-radius: 6px; margin-bottom: 20px; box-shadow: 0 0 10px rgba(255, 170, 0, 0.1); text-align: left;">
+                            <h3 style="color: #ffaa00; margin-top: 0; margin-bottom: 12px; font-size: 15px; text-align: center;">💡 Новая идея</h3>
+                            
+                            <input type="text" id="idea-title-input" placeholder="Краткое название вашей идеи..." style="width: 100%; background: #0d0d0d; border: 1px solid #444; color: #fff; padding: 10px; font-size: 13px; border-radius: 4px; box-sizing: border-box; margin-bottom: 10px;">
+                            
+                            <textarea id="idea-text-input" placeholder="Подробно распишите суть вашего предложения..." rows="4" style="width: 100%; background: #0d0d0d; border: 1px solid #444; color: #fff; padding: 10px; font-size: 13px; border-radius: 4px; box-sizing: border-box; resize: none; margin-bottom: 12px;"></textarea>
+                            
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn btn-primary" onclick="createIdeaTopic()" style="background: #a87034; border-color: #ffaa00; flex-grow: 1; font-size: 13px; padding: 10px; font-weight: bold; margin: 0;">
+                                    🚀 Опубликовать
+                                </button>
+                                <button class="btn btn-secondary" onclick="toggleIdeaForm()" style="width: auto; padding: 10px 15px; margin: 0;">
+                                    Отмена
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Контейнер для списка топиков -->
+                        <div id="ideas-list-container"></div>
+                    </div>
+
+                </div>
+                <div style="margin-top: 15px; padding: 0 10px;">
+                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">🏃 На главную</button>
+                </div>
+            </div>
+
+            <!-- Профиль персонажа -->
+            <div id="profile-screen" class="hidden">
+                <div class="screen-title-game" id="profile-title-name">Профиль</div>
+                <div class="profile-avatar-container">
+                    <img src="profile.jpg" id="profile-avatar-img" onclick="triggerAvatarUpload()">
+                    <input type="file" id="avatar-input" class="hidden" accept="image/*" onchange="handleAvatarUpload(event)">
+                </div>
+                <div class="profile-stage-box">Этап: <span id="profile-current-stage" class="text-orange"></span></div>
+                <div class="combat-params-box">
+                    <div class="player-name">Характеристики</div>
+                    <div class="stats-grid font-combat">
+                        <div>⚔️ Атака: <span id="profile-attack">0</span></div>
+                        <div>❤️ ХП: <span id="profile-hp">0</span></div>
+                        <div>🛡️ Защита: <span id="profile-defense">0</span></div>
+                    </div>
+                </div>
+                <div class="wap-info-box">
+                    <div>📖 <b>О себе:</b> <span id="profile-about-text"></span></div>
+                    <div>👤 <b>Пол:</b> <span id="profile-gender-text"></span></div>
+                    <div>📅 <b>Регистрация:</b> <span id="profile-reg-date"></span></div>
+                    <div>🟢 <b>Последний вход:</b> <span id="profile-last-seen"></span></div>
+                    <div>📌 <b>ID:</b> <span id="profile-id"></span></div>
+                </div>
+                <div class="game-buttons" style="margin-top: 10px;">
+                    <button class="btn btn-primary" onclick="openProfileSettings()">⚙️ Настройки</button>
+                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">↩️ Назад</button>
+                </div>
+            </div>
+
+            <!-- Настройки Профиля -->
+            <div id="profile-settings-screen" class="hidden">
+                <div class="screen-title">Настройки Профиля</div>
+                <div class="form-screen">
+                    <textarea id="settings-about-input" rows="3" style="width:100%; background:#1a1a1a; color:#fff; border:1px solid #333; padding:5px;"></textarea>
+                    <select id="settings-gender-select" style="width:100%; margin: 10px 0; background:#1a1a1a; color:#fff; border:1px solid #333; padding:5px;">
+                        <option value="Не указан">Не указан</option>
+                        <option value="Мужской">Мужской ♂️</option>
+                        <option value="Женский">Женский ♀️</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="saveProfileSettings()">Сохранить</button>
+                    <button class="btn btn-secondary" onclick="openGameScreen('profile-screen')">Назад</button>
+                </div>
+            </div>
+
+            <!-- ЭКРАН ЧАТА "БЕСЕДКА" -->
+            <div id="chat-screen" class="hidden">
+                <div class="quests-header" style="background: #111; border-bottom: 2px solid #222; padding: 12px 10px; font-size: 16px; font-weight: bold; color: #ffd700; text-align: center;">💬 Беседка Хаоса</div>
+                <div class="chat-form-container" style="display: flex; gap: 6px; padding: 10px; background: #161616; border-bottom: 1px solid #222; align-items: center;">
+                    <button class="btn" onclick="refreshChat()" style="width: auto; padding: 8px 12px; background: #222; border-color: #444; margin: 0;">🔄</button>
+                    <input type="text" id="chat-input" placeholder="Ваше сообщение..." style="flex-grow: 1; background: #0d0d0d; border: 1px solid #333; color: #fff; padding: 8px; font-size: 13px; border-radius: 4px; box-sizing: border-box;">
+                    <button class="btn btn-primary" onclick="sendChatMessage()" style="width: auto; padding: 8px 15px; background: #4a3319; border-color: #6e4a24; margin: 0; font-size: 13px;">Написать</button>
+                </div>
+                <div id="chat-messages-box" style="padding: 10px; min-height: 350px; max-height: 450px; overflow-y: auto; background: #0d0d0d; text-align: left;"></div>
+                <div style="margin-top: 15px; padding: 0 10px; margin-bottom: 15px;">
+                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">🏃 На главную</button>
+                </div>
+            </div>
+
+            <!-- ЭКРАН: ТАВЕРНА ГОБЛИНОВ -->
+            <div id="tavern-screen" class="hidden">
+                <div class="screen-title" style="color: #ffaa00; text-shadow: 0 0 10px #aa7700; text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 10px;">🎲 Таверна Гоблинов</div>
+                <div class="image-container" style="margin-bottom: 15px; text-align: center;">
+                    <img src="taverna.jpg" alt="Таверна Гоблинов" class="main-image" style="border: 2px solid #ffaa00; border-radius: 6px; max-width: 100%; height: auto;">
+                </div>
+                <div style="background: #16110b; border: 1.5px solid #ffaa00; padding: 12px; border-radius: 6px; margin-bottom: 15px; text-align: center; font-size: 13px; color: #dfdfdf; line-height: 1.4;">
+                    <span style="color: #4da6ff; font-weight: bold;">Гоблин Шмыг:</span> <span id="goblin-speech">"Хей, путник! Заходи, присаживайся. Готов испытать удачу в кости? Ставь серебро — если выиграешь, удвою ставку!"</span>
+                </div>
+                <div style="background: #0d0d0d; border: 1px solid #333; border-radius: 4px; padding: 15px; text-align: center; margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 15px;">
+                        <div style="width: 45%;">
+                            <div style="color: #4da6ff; font-weight: bold; font-size: 14px; margin-bottom: 5px;">Вы</div>
+                            <div id="player-dice-visual" style="font-size: 32px; letter-spacing: 5px; min-height: 40px;">🎲 🎲</div>
+                            <div id="player-dice-score" style="font-size: 13px; color: #aaa; margin-top: 5px;">Сумма: 0</div>
+                        </div>
+                        <div style="font-size: 20px; font-weight: bold; color: #555;">VS</div>
+                        <div style="width: 45%;">
+                            <div style="color: #ff4d4d; font-weight: bold; font-size: 14px; margin-bottom: 5px;">Гоблин</div>
+                            <div id="goblin-dice-visual" style="font-size: 32px; letter-spacing: 5px; min-height: 40px;">🎲 🎲</div>
+                            <div id="goblin-dice-score" style="font-size: 13px; color: #aaa; margin-top: 5px;">Сумма: 0</div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; font-size: 12px; color: #aaa; margin-bottom: 5px;">Ваша ставка серебра:</label>
+                        <input type="number" id="dice-bet-input" placeholder="Введите ставку..." style="width: 80%; background: #161616; border: 1px solid #444; color: #ffd700; font-weight: bold; text-align: center; padding: 8px; font-size: 14px; border-radius: 4px;">
+                        <div style="display: flex; justify-content: center; gap: 5px; margin-top: 8px;">
+                            <button class="btn" onclick="setDiceBet(500)" style="width: auto; padding: 4px 8px; font-size: 11px; margin: 0; background: #222;">500</button>
+                            <button class="btn" onclick="setDiceBet(5000)" style="width: auto; padding: 4px 8px; font-size: 11px; margin: 0; background: #222;">5к</button>
+                            <button class="btn" onclick="setDiceBet(50000)" style="width: auto; padding: 4px 8px; font-size: 11px; margin: 0; background: #222;">50к</button>
+                            <button class="btn" onclick="setDiceBet(activePlayer ? activePlayer.silver : 0)" style="width: auto; padding: 4px 8px; font-size: 11px; margin: 0; background: #332211; border-color: #553311; color: #ffaa00;">Ва-Банк!</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="playDiceGame()" style="background: #8c5a15; border-color: #b87b20; width: 90%; font-size: 15px; padding: 10px;">🎲 Бросить кости!</button>
+                </div>
+                <div id="dice-result-log" class="hidden" style="background: #111; border: 1px solid #222; padding: 12px; border-radius: 4px; font-size: 13px; text-align: center; margin-bottom: 15px;"></div>
+                <div class="game-buttons" style="margin-bottom: 15px;">
+                    <button class="btn btn-secondary" onclick="openGameScreen('game-menu-screen')">🏃 Выйти из таверны</button>
+                </div>
+            </div>
+
+            <!-- Нижний инфо-бар игрока -->
+            <div class="bottom-player-bar">
+                <div class="player-name" id="display-username">Admin</div>
+                <div class="stats-grid">
+                    <div>⭐ Уровень: <span id="display-level">0</span></div>
+                    <div>🪙 Серебро: <span id="display-silver">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модалка Ежедневного Сундука -->
+        <div id="chest-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <div class="modal-title">Древний Сундук</div>
+                <img src="syndyk.jpg" class="modal-chest-img">
+                <div id="chest-result" class="chest-result-text">Вы можете открыть сундук раз в сутки и получить ценное серебро!</div>
+                <div id="chest-modal-controls" style="margin-top: 15px;">
+                    <button class="btn btn-primary" style="background:#cc7a00; border-color:#ff9900;" onclick="openDailyChest()">Открыть сундук</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модалка взноса в клан -->
+        <div id="deposit-silver-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <div class="modal-title">🪙 Взнос в казну</div>
+                <p style="font-size: 12px; color: #aaa; margin-bottom: 10px;">Вы можете внесить максимум 10,000 серебра в день.</p>
+                <input type="number" id="deposit-silver-amount" min="1" pattern="[0-9]*" placeholder="Количество серебра" style="width: 100%; background: #0d0d0d; border: 1px solid #333; color: #fff; padding: 8px; text-align: center; box-sizing: border-box; margin-bottom: 15px;">
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-primary" style="padding: 8px; width:50%;" onclick="submitSilverDeposit()">Внести</button>
+                    <button class="btn btn-secondary" style="padding: 8px; width:50%;" onclick="closeDepositSilverModal()">Отмена</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- УНИВЕРСАЛЬНОЕ ИГРОВОЕ УВЕДОМЛЕНИЕ -->
+        <div id="game-alert-modal" class="modal-overlay hidden">
+            <div class="modal-content" style="border-color: #ffae19;">
+                <div class="modal-title" id="game-alert-title">Вестник Хаоса</div>
+                <div id="game-alert-text" style="font-size: 13px; color: #cccccc; margin-bottom: 20px; line-height: 1.4;"></div>
+                <div id="game-alert-controls" style="display: flex; gap: 10px; justify-content: center;"></div>
+            </div>
+        </div>
+
+        <footer class="game-footer">
+            Время Киев: <span id="kyiv-time">00:00:00</span>
+            <div style="font-size: 10px; color: #555; margin-top: 4px;">© Все права защищены 2026</div>
+        </footer>
+    </div>
+
+    <!-- ВЕРСИЯ СКРИПТА ИЗМЕНЕНА ДЛЯ ИЗБЕЖАНИЯ КЭШИРОВАНИЯ -->
+    <script src="script.js?v=2.5" defer></script>
+</body>
+</html>
